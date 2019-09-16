@@ -1,0 +1,26 @@
+body{
+    background-image: url("./images/background.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#gameBoard{
+    margin: auto;
+    margin-top: 25px;
+    width: 75%;
+    height: 80vh;
+    background-color: rgb(26, 224, 215);
+    text-align: center;
+}
+
+#timeWrapper{
+    background-color: rgba(0,0,0,0.5);
+    width: 500px;
+    height: 25px;
+    display: inline-block;
+}
+
+#timer{
+    height: 25px;
+    background-color: yellow;
+}
