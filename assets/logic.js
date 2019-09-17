@@ -42,17 +42,95 @@ var trivia = {
     ],
 }
 
-function initialize(){
-    $("#questions").text("");
-    $("#answers").text("");
+// The strat screen
+function start(){
+    $("#timeWrapper").hide();
+    $("#questions").hide();
+    $("#answers").hide();
+}
+
+// Begins the game
+$("#start").on("click", function(){
+    $("#timeWrapper").show();
+    $("#questions").show();
+    $("#answers").show();    
+    $("#start").hide();
+    timer();
+});
+
+function randNoRepeat(){
+
+    var rand = [];
+
+    for(var i = 1; i < 5; i++){
+        var temp = Math.floor(Math.random() * 4) + 1;
+        if(rand.indexOf(temp) == -1){
+            rand.push(temp);
+        }
+        else
+         i--;
+    }
+    return rand;
 }
 
 function timer(){
-    $("#timer").animate({width: 0}, 10*1000);
+    $("#timer").css("width", "500");
+    $("#timer").animate({width: 0}, 30*1000);
 }
 
+function timerReset(){
+    $("#timer").finish();
+}
 
-timer();
+function question(num){
 
+    $("#questions").text(trivia.questionsAndAnswers[num].question);
 
-// $("#questions").text(trivia.questions[1]);
+    var rand = randNoRepeat();
+    var ans1 = "trivia.questionsAndAnswers[num].answer" + String(rand[0]);
+    var ans2 = "trivia.questionsAndAnswers[num].answer" + String(rand[1]);
+    var ans3 = "trivia.questionsAndAnswers[num].answer" + String(rand[2]);
+    var ans4 = "trivia.questionsAndAnswers[num].answer" + String(rand[3]);
+
+    $("#answer1").text(eval(ans1));
+    $("#answer2").text(eval(ans2));
+    $("#answer3").text(eval(ans3));
+    $("#answer4").text(eval(ans4)); 
+}
+
+$("#answer1, #answer2, #answer3, #answer4").on("click", function(event){
+    if($(this).text() == trivia.questionsAndAnswers[num].answer1){
+        num++;
+        wins++;
+        question(num);
+        timerReset();
+        timer();
+    }
+    else{
+        num++;
+        losses++;
+        question(num);
+        timerReset();
+        timer();        
+    }
+    console.log("wins: " + wins);
+    console.log("losses: " + losses);
+    console.log("unanswered: " + unanswered)
+});
+
+function timeout(){
+    num++;
+
+    setTimeout(question, 30 * 1000, num);
+    setTimeout(timerReset, 30 * 1000);
+    setTimeout(timer, 30 * 1000);
+    setTimeout(function(){unanswered++}, 30 * 1000);
+}
+
+start();
+var num = 0;
+var wins = 0;
+var losses = 0;
+var unanswered = 0;
+question(num);
+timeout();

@@ -13,6 +13,12 @@ body{
     text-align: center;
 }
 
+#start{
+    margin-top: 15%;
+    font-size: 32px;
+    width: 500px;
+}
+
 #timeWrapper{
     background-color: rgba(0,0,0,0.5);
     width: 500px;
@@ -24,3 +30,21 @@ body{
     height: 25px;
     background-color: yellow;
 }
+
+#answers{
+    margin-top: 50px;
+    display: inline-block;
+}
+
+#answer1:hover,#answer2:hover,#answer3:hover,#answer4:hover{
+    border: solid black 1px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+#answer1:active,#answer2:active,#answer3:active,#answer4:active{
+    border: solid yellow 1px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 2px;
+}
+
