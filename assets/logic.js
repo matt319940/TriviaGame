@@ -37,8 +37,16 @@ var trivia = {
             answer2: "I don't have time for this.",
             answer3: "I don't get paid enough for this.",
             answer4: "Where is my super suit?",
-            move: "star_wars"
+            movie: "star_wars"
         },
+        {
+            question: "",
+            answer1: "",
+            answer2: "",
+            answer3: "",
+            ansewr4: "",
+            movie: ""
+        }
     ],
 }
 
@@ -56,6 +64,7 @@ $("#start").on("click", function(){
     $("#answers").show();    
     $("#start").hide();
     timer();
+    timeout();
 });
 
 function randNoRepeat(){
@@ -99,32 +108,46 @@ function question(num){
 }
 
 $("#answer1, #answer2, #answer3, #answer4").on("click", function(event){
-    if($(this).text() == trivia.questionsAndAnswers[num].answer1){
-        num++;
+    num++;
+
+    if($(this).text() == trivia.questionsAndAnswers[num - 1].answer1){
         wins++;
         question(num);
         timerReset();
         timer();
     }
     else{
-        num++;
         losses++;
         question(num);
         timerReset();
         timer();        
     }
-    console.log("wins: " + wins);
-    console.log("losses: " + losses);
-    console.log("unanswered: " + unanswered)
+    var total = wins + losses + unanswered;
+    if(total == 5)
+    gameOver();
 });
 
-function timeout(){
-    num++;
+function gameOver(){
+    $("#timeWrapper").hide();
+    $("#questions").hide();
+    $("#answers").hide();
 
-    setTimeout(question, 30 * 1000, num);
+    $("#gameOver").text("Correct Answers: " + wins + "| Incorrect Answers: " + losses + " | Unanswered Questions: " + unanswered);
+    var button = $("<button>");
+    button.text("Play Again?");
+    $("#replayButton").append(button);
+
+    $("#replayButton button").on("click", function(){
+        location.reload();
+    });
+}
+
+function timeout(){
+    setTimeout(question, 30 * 1000, num+1);
     setTimeout(timerReset, 30 * 1000);
     setTimeout(timer, 30 * 1000);
     setTimeout(function(){unanswered++}, 30 * 1000);
+    setTimeout(function(){num++}, 30 * 1000);
 }
 
 start();
@@ -133,4 +156,6 @@ var wins = 0;
 var losses = 0;
 var unanswered = 0;
 question(num);
-timeout();
+
+
+
