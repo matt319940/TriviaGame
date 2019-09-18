@@ -5,7 +5,7 @@ var trivia = {
             answer2: "Adam Sandler",
             answer3: "Christian Bale",
             answer4: "Tom Hanks",
-            movie: "american_psycho"
+            movie: "american+psycho"
         }, 
         {
             question: "What is the first Pixar-produced film to have a female protagonist?",
@@ -21,7 +21,7 @@ var trivia = {
             answer2: "10",
             answer3: "57",
             answer4: "3",
-            movie: "harry_potter"           
+            movie: "harry+potter"           
         },
         {
             question: "Who was the first character to fart in a Disney movie?",
@@ -29,7 +29,7 @@ var trivia = {
             answer2: "Phil - Herculese",
             answer3: "Dopey - Snow White and the Seven Dwarves",
             answer4: "Cogsworth - Beauty and the Beast",
-            movie: "lion_king"              
+            movie: "lion+king"              
         },
         {
             question: "What line is said in every Star Wars movie?",
@@ -37,7 +37,7 @@ var trivia = {
             answer2: "I don't have time for this.",
             answer3: "I don't get paid enough for this.",
             answer4: "Where is my super suit?",
-            movie: "star_wars"
+            movie: "star+wars"
         },
         {
             question: "",
@@ -120,7 +120,7 @@ $("#answer1, #answer2, #answer3, #answer4").on("click", function(event){
         losses++;
         question(num);
         timerReset();
-        timer();        
+        timer();   
     }
     var total = wins + losses + unanswered;
     if(total == 5)
